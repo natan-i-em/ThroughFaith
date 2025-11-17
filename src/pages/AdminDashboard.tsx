@@ -26,6 +26,7 @@ export default function AdminDashboard() {
     status: '',
     dateFrom: '',
     dateTo: '',
+    customerName: ''
   });
 
   useEffect(() => {
@@ -73,6 +74,8 @@ export default function AdminDashboard() {
     if (filters.status && report.lead_status !== filters.status) return false;
     if (filters.dateFrom && report.contact_date < filters.dateFrom) return false;
     if (filters.dateTo && report.contact_date > filters.dateTo) return false;
+    if (filters.customerName && !report.customer_name.toLowerCase().includes(filters.customerName.toLowerCase())) return false;
+
     return true;
   });
 
@@ -117,7 +120,7 @@ export default function AdminDashboard() {
       new Date(report.contact_date).toLocaleDateString(),
       report.employee.full_name,
       report.customer_name,
-      report.customer_phone,
+      `"${report.customer_phone}"`,
       report.lead_source,
       report.property_interested_in,
       report.lead_status,
@@ -237,7 +240,7 @@ export default function AdminDashboard() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-2">
                   <Filter className="w-5 h-5 text-gray-700" />
@@ -250,6 +253,21 @@ export default function AdminDashboard() {
                   <Download className="w-4 h-4" />
                   <span>Export CSV</span>
                 </button>
+              </div>
+              
+                          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+
+                            <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Customer Name
+                </label>
+                <input
+                  type="text"
+                  value={filters.customerName}
+                  onChange={(e) => setFilters({ ...filters, customerName: e.target.value })}
+                  placeholder="Search by customer name"
+                  className="w-50 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                />
               </div>
 
               <div className="grid md:grid-cols-4 gap-4">
@@ -313,9 +331,9 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              {(filters.employee || filters.status || filters.dateFrom || filters.dateTo) && (
+              {(filters.employee || filters.status || filters.dateFrom || filters.dateTo || filters.customerName) && (
                 <button
-                  onClick={() => setFilters({ employee: '', status: '', dateFrom: '', dateTo: '' })}
+                  onClick={() => setFilters({ employee: '', status: '', dateFrom: '', dateTo: '' , customerName: ''})}
                   className="mt-4 text-sm text-amber-600 hover:text-amber-700 font-semibold"
                 >
                   Clear Filters

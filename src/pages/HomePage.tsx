@@ -1,5 +1,5 @@
 import { Building2, Users, Shield } from 'lucide-react';
-
+// import TFP from '../assets/TFP.png';
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -8,8 +8,9 @@ export default function HomePage() {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full mb-6">
             <Building2 className="w-10 h-10 text-white" />
           </div>
+            {/* <img src={TFP} alt="TFP Logo" className="w-8 h-8 object-contain" /> */}
           <h1 className="text-5xl font-bold text-white mb-4">
-            Real Estate Follow-Up System
+            Through Faith Properties Follow-Up System
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Professional CRM for tracking customer interactions and managing sales leads

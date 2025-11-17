@@ -1,10 +1,18 @@
 import { createClient } from '@supabase/supabase-js';
 
+declare global {
+  interface Window {
+    supabase: typeof supabase;
+  }
+}
+
+
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+window.supabase = supabase;
 export type Profile = {
   id: string;
   email: string;

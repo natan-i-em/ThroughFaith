@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Building2 } from 'lucide-react';
 
+
 interface LoginProps {
   userType: 'employee' | 'admin';
 }
@@ -17,7 +18,7 @@ export default function Login({ userType }: LoginProps) {
     e.preventDefault();
     setError('');
     setLoading(true);
-
+    console.log('Attempting to sign in:', { email, password });
     try {
       await signIn(email, password);
     } catch (err) {
